@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-label="TRM logo">
+  <g fill="#16A34A">
+    <path d="M18 22h92v18H76v62H52V40H18z"/>
+    <path d="M126 102V22h39c27 0 40 12 40 32 0 14-7 24-20 29l25 19h-30l-21-16h-9v16zm24-38h13c12 0 18-3 18-10s-6-10-18-10h-13z"/>
+    <path d="M224 102V22h25l31 40 31-40h25v80h-24V57l-27 35h-10l-27-35v45z"/>
+  </g>
+</svg>
