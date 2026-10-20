@@ -17,6 +17,7 @@ import Stock from "./mymenu/stock";
 import Sales from "./mymenu/sales";
 import Employee from "./employees/employees";
 import Dashboard from "./dashboard/Dashboard";
+import TableManagement from "./mymenu/newtable";
 
 const myTheme = createTheme({
   components: {
@@ -100,11 +101,12 @@ function App() {
           />
           <Route
             path="/dashboard"
-            element={
-              <MenuProvider
-                children={<AdminMiniDrawer content={<Dashboard/>} />}
-              />
-            }
+            element={<TableManagement />}
+            // element={
+            //   <MenuProvider
+            //     children={<AdminMiniDrawer content={<Dashboard/>} />}
+            //   />
+            // }
           />
 
           <Route

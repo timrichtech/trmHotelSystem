@@ -30,13 +30,15 @@ export default function MyCart() {
         alert('Cant exceed available!');
       }
           
-    };
+  };
+
 
     return (
       <Card>
         <CardContent>
           {cart.length > 0 ?<>
-          <Box display={"flex"} justifyContent={"end"}>
+          <Box className="flex justify-end gap-2" >
+            <Button onClick={() => nav("/menu")} variant="contained" color="warning"><Add/>Add Food</Button>
             <Typography variant="h6" color={"primary"}>
               Table : {currentTable ? currentTable.table_name : "None"}
             </Typography>

@@ -145,7 +145,7 @@ export const NewProduct = (props) => {
               </IconButton>
             }
           >
-            <Avatar sx={{ width: 124, height: 124 }}></Avatar>
+            <Avatar sx={{ width: 124, height: 124 }} ></Avatar>
           </Badge>
         </Box>
         <form onSubmit={newProductForm.handleSubmit}>

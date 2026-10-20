@@ -23,12 +23,44 @@ import {
   DialogContent,
   Chip,
   Badge,
+  Stack,
 } from "@mui/material";
 import { Close, MoreVert } from "@mui/icons-material";
 import { Payment } from "../dashboard/adminSidebar";
 import dayjs from "dayjs";
+import { ChevronDown, ClosedCaption, Filter, Search } from "lucide-react";
 
 export default function Orders() {
+    const [search, setSearch] = useState("");
+  return (
+    <Stack className="gap-y-2">
+      <Box className="flex justify-end gap-x-3">
+          <div className="relative">
+                <Search
+                  size={17}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                />
+                <input
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder="Search Orders..."
+                  className="w-full rounded-xl border border-slate-200 py-2.5 pl-9 pr-3 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 sm:w-56"
+                />
+        </div>
+        <Button>
+          <Filter />
+          Filter by..
+          <ChevronDown/>
+          </Button>
+      </Box>
+      <Box>
+        <Order/>
+      </Box>
+    </Stack>
+  )
+}
+
+function Order() {
   const { orders, orderedItems, updateOrder } = useContext(MenuContext);
   const [anchorEl, setanchorEl] = useState(null);
   //current order
@@ -78,7 +110,7 @@ export default function Orders() {
       <CardContent>
         <TableContainer>
           <Table>
-            <TableHead>
+            <TableHead className="">
               <TableRow>
                 <TableCell>
                   <Typography fontWeight={"bold"}></Typography>
@@ -150,8 +182,9 @@ export default function Orders() {
                           </Button>
                         )}
                       </TableCell>
-                      <TableCell>
-                      <Badge badgeContent='' variant="circular" color={order.isBooked? 'success' :'primary'}></Badge>
+                      <TableCell className="flex gap-x-1">
+                        <Badge badgeContent='' variant="circular" color={order.isBooked ? 'success' : 'primary'}></Badge>
+                        <Typography className="!text-sm">{ order.isBooked? "Avilable" :"Booked"}</Typography>
                       </TableCell>
                       <TableCell>
                         <IconButton
@@ -278,6 +311,7 @@ export default function Orders() {
               </Table>
             </TableContainer>
           </DialogContent>
+          <Box className="flex justify-end p-5"><Button variant="contained" color="warning" className="m-r-10" onClick={handleServe}>Serve</Button></Box>
         </Dialog>
       </CardContent>
     </Card>

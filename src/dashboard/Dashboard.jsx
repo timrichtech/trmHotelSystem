@@ -730,3 +730,16 @@ export default function Dashboard() {
     </div>
   );
 }
+//  <ListItemButton
+//         onClick={() => {
+//           setMainBody("Dashboard");
+//           setTitle("Dashboard");
+//           handleClose();
+//           nav("/dashboard", { replace: false });
+//         }}
+//       >
+//         <IconButton>
+//           <Dashboard/>
+//         </IconButton>
+//         <ListItemText primary="Dashboard" />
+//       </ListItemButton>

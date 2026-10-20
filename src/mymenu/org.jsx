@@ -20,10 +20,10 @@ import {
 } from "@mui/material";
 import Grid2 from "@mui/material/Grid2";
 import { Add, Close, Edit, Remove } from "@mui/icons-material";
-import MyMenu from "./menu";
+// import MyMenu from "./menu";
 import { OrganizerContext } from "../ORGANIZER/organizer";
 import { useNavigate } from "react-router";
-import { MenuContext } from "./menudata";
+// import { MenuContext } from "./menudata";
 import { useFormik } from "formik";
 
 const Orgs = (props) => {
@@ -92,6 +92,7 @@ const Orgs = (props) => {
         </Stack>
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
+      {/* creating new table dialog*/}
       <Dialog
         open={openNewProduct}
         onClose={() => setOpenNewProduct(false)}
@@ -195,14 +196,15 @@ function TTable(props) {
   return (
     <Stack rowGap={1} p={1}>
       <CardActionArea onClick={handleTableClick} disabled={isBooked} >
-        <Stack className="bg-blue-700 h-40 w-60" content-center justify-center place-content-center flex rounded-md>
-          {/* <Stack className="flex content-center justify-center"  > */}
+        <Card className="bg-blue-700 h-40 w-60 items-center justify-center flex rounded-md">
+          
             <Typography variant="h5" fontWeight={"bold"}>
               {table_name}
             </Typography>
+         
             {isBooked ? <Chip color="warning" label="Booked" /> : null}
          
-        </Stack>
+        </Card>
       </CardActionArea>
       <Box
         display={"flex"}

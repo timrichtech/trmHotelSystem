@@ -153,14 +153,8 @@ function Product(props) {
   }, [quantity, props.product]);
   return (
     <>
-      <CardMedia
-        component="img"
-        height={150}
-        src={"../resources/andazi.jfif"}
-        alt={food_name}
-      />
       <CardContent>
-       <CardMedia src={`http://127.0.0.1:8000/hot${image}`}
+       <CardMedia component="img" className="max-w-sm" src={`http://127.0.0.1:8000/hot${image}`}
        alt={food_name}
        />
        

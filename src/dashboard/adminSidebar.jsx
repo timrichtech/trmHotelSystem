@@ -62,7 +62,8 @@ import Videos from "../mymenu/videos";
 import Memes from "../mymenu/memes";
 import { MenuContext } from "../mymenu/menudata";
 import { blue } from "@mui/material/colors";
-import { ChartNoAxesCombined,  LucideMenu,  Package,  Settings,  Settings2,  ShoppingCartIcon, Utensils, Warehouse } from "lucide-react";
+import { BedDouble, Bell, Building2, ChartNoAxesCombined,  ChevronDown,  LayoutDashboard,  LogOut,  LucideMenu,  Package,  Settings,  Settings2,  ShoppingCartIcon, Table2Icon, Utensils, Warehouse } from "lucide-react";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
@@ -148,7 +149,7 @@ export default function AdminMiniDrawer(props) {
   const navigate = useNavigate();
   const theme = useTheme();
   const [appBarTitle, setAppBarTitle] = React.useState("App");
-  const { content } = props;
+  const { content,navigation} = props;
 
   const { cart } = React.useContext(MenuContext);
 
@@ -183,7 +184,9 @@ export default function AdminMiniDrawer(props) {
   const handleViewCart = () => {
     navigate("/cart", { replace: false });
   };
-
+  
+const [active, setActive] = useState("Dashboard");
+const [notificationsOpen, setNotificationsOpen] = useState(false);
   return (
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline />My app bar */}
@@ -203,9 +206,11 @@ export default function AdminMiniDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            {appBarTitle}
-          </Typography>
+         <Stack className="min-w-0">
+              <Typography className="truncate text-sm font-semibold text-gray-800">
+                {active}
+              </Typography>
+            </Stack>
           <Box
             display={"flex"}
             justifyContent={"end"}
@@ -221,9 +226,9 @@ export default function AdminMiniDrawer(props) {
               color="error"
               variant="standard"
             >
-              <IconButton onClick={() => {}}>
-                <Settings fontSize="medium" />
-              </IconButton>
+              <Button  className="relative rounded-xl  border-gray-100 p-2.5 text-yellow hover:bg-gray-50">
+                <Settings size={19} />
+              </Button>
             </Badge>
             <Badge
               size="sm"
@@ -236,11 +241,46 @@ export default function AdminMiniDrawer(props) {
                 <ShoppingCart fontSize="medium" className="text-[#CB5A0A]"/>
               </IconButton>
             </Badge>
-            <IconButton>
-              <Notifications fontSize="medium" />
-            </IconButton>
+            <div className="relative">
+              {/* notification button */}
+               <Badge
+              size="sm"
+              badgeinset="50%"
+              badgeContent={2}
+              color="error"
+              variant="standard"
+            >
+              <button
+                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                className="relative rounded-xl  border-gray-100 p-2.5 text-yellow hover:bg-gray-50"
+                aria-label="Notifications"
+              >
+                <Bell size={19} />
+                {/* <span className="absolute right-2 top-2 h-2 w-2 rounded-full border-2 border-white bg-red-500" /> */}
+              </button>
+              </Badge>
+
+              {notificationsOpen && (
+                <div className="absolute right-0 top-14 w-64 rounded-xl border border-gray-100 bg-white p-4 shadow-xl">
+                  <p className="font-semibold text-gray-900">
+                    Notifications
+                  </p>
+                  <p className="mt-3 text-sm text-gray-500">
+                    You have 3 new booking updates.
+                  </p>
+                  <button
+                    onClick={() => setNotificationsOpen(false)}
+                    className="mt-3 text-sm font-medium text-green-700"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
             <IconButton onClick={(e) => setAnchoeEl(e.currentTarget)}>
-              <Avatar sx={{ width: 32, height: 32 }}>Pic</Avatar>
+              <Avatar sx={{ width: 32, height: 32 }} className="text-green-600 font-bold">
+                A
+              </Avatar>
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -279,7 +319,19 @@ export default function AdminMiniDrawer(props) {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem onClick={() => {}}>
+                <button className="flex items-center gap-2 rounded-xl p-1.5 hover:bg-gray-50">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white">
+                A
+              </div>
+              <div className="hidden text-left sm:block">
+                <p className="text-sm font-semibold text-gray-800">
+                  Administrator
+                </p>
+                <p className="text-xs text-gray-400">Hotel Manager</p>
+              </div>
+              <ChevronDown size={16} className="hidden text-gray-400 sm:block" />
+            </button>
+              {/* <MenuItem onClick={() => {}}>
                 <Avatar /> Profile
               </MenuItem>
               <Divider />
@@ -288,33 +340,38 @@ export default function AdminMiniDrawer(props) {
                   <Logout fontSize="small" />
                 </ListItemIcon>
                 Logout
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </Box>
         </Toolbar>
       </Box>
       <Drawer variant="permanent" open={open} className="bg-blue-600">
-        <DrawerHeader >
-          <Box display={"flex"} alignItems={"center"}>
-            <Avatar src="/TRM-logo-green-600.svg" className="size-5"/>
-            <Typography className="text-h6 mr-auto font-bold">
-              TRM Hot system
-            </Typography>
-            <IconButton onClick={handleDrawerClose} sx={{ ml: "auto" }}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </Box>
+        <DrawerHeader className="pt-2">
+        <Stack className="flex  shrink-0 items-center justify-between border-b border-gray-100 px-2">
+          <Box className="flex items-center gap-3">
+            <div className="flex p-3 h-11 w-11 items-center justify-center rounded-xl bg-green-600 text-2xl font-black text-white">
+              TRM
+            </div>
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">
+                TRM Hot system
+              </h1>
+              <p className="text-xs text-gray-500">
+                Hotel Management
+              </p>
+              </div>
+            </Box>
+          </Stack>
         </DrawerHeader>
         <Divider />
         <AdminDash
           setMainBody={setMainBody}
           setTitle={setAppBarTitle}
           handleClose={handleDrawerClose}
+           active={active}
+        setActive={setActive}
           className="bg-mint-500"
+
         
         />
       </Drawer>
@@ -330,249 +387,84 @@ export default function AdminMiniDrawer(props) {
     </Box>
   );
 }
-
-function AdminDash(props) {
+const navigation = [
+  { label: "Dashboard", icon: LayoutDashboard ,navpath: "/dashboard"},
+  { label: "Organization", icon: TableRestaurant ,navpath: "/organization"},
+  { label: "Products", icon: Package,navpath: "/products" },
+  { label: "Menu", icon: Utensils,navpath: "/menu" },
+  { label: "Orders", icon: ShoppingCart ,navpath: "/orders"},
+  { label: "Inventory", icon: Warehouse ,navpath: "/stock"},
+  { label: "Sales", icon: ChartNoAxesCombined ,navpath: "/sales"},
+  { label: "Settings", icon: Settings ,},
+];
+ 
+function AdminDash( { active, setActive,setMainBody,setTitle,handleClose }) {
   const nav = useNavigate();
-  const { setMainBody, setTitle, handleClose } = props;
-  const [openAccounts, setOpenAccounts] = React.useState(false);
-  const [openCommunication, setOpenCommunication] = React.useState(false);
-  const [openInventory, setOpenInventory] = React.useState(false);
-  const [openAnalytics, setOpenanalytics] = React.useState(false);
+  
+  // const { setMainBody, setTitle, handleClose } = props;
+  
 
   return (
-    <List className="bg-mint-500">
-      <ListItemButton
-        onClick={() => {
-          setMainBody("Dashboard");
-          setTitle("Dashboard");
-          handleClose();
-          // nav("/dashboard", { replace: false });
-        }}
-      >
-        <IconButton>
-          <Dashboard/>
-        </IconButton>
-        <ListItemText primary="Dashboard" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Organization");
-          nav("/organization", { replace: false });
-        }}
-      >
-          <IconButton>
-          <TableRestaurant/>
-        </IconButton>
-        <ListItemText primary="Organization" />
-      </ListItemButton>
+    <Stack>
+      <Typography className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-gray-400">
+            Main menu
+          </Typography>
+           <nav className="space-y-1  gap-y-2">
+            {navigation.map(({ label, icon: Icon, navpath }) => {
+              const selected = active === label;
 
-      <ListItemButton
-        onClick={() => {
-          setTitle("Products");
+              return (
+                <button
+                  key={label}
+                  onClick={() => {
+                    setActive(label);
+                    setMainBody(navpath);
+                    nav(navpath);
+                    handleClose()
 
-          nav("/products", { replace: false });
-        }}
-      >
-          <IconButton>
-          <Package/>
-        </IconButton>
-        <ListItemText primary="Products" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Menu");
-          nav("/menu", { replace: false });
-        }}
-      >
-        <IconButton>
-          <Utensils/>
-        </IconButton>
-        <ListItemText primary="Menu" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Orders");
-          nav("/orders", { replace: false });
-        }}
-      >
-        <IconButton>
-          <ShoppingCartIcon/>
-        </IconButton>
-        <ListItemText primary="Orders" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Stock");
-          nav("/stock", { replace: false });
-        }}
-      >
-        <IconButton>
-          <Warehouse/>
-        </IconButton>
-        <ListItemText primary="Inventory" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Sales");
-          nav("/sales", { replace: false });
-        }}
-      >
-        <IconButton>
-          <ChartNoAxesCombined/>
-        </IconButton>
-        <ListItemText primary="Sales" />
-      </ListItemButton>
-      {/* <ListItemButton
-        onClick={() => {
-          setTitle("Employees");
-          handleClose();
-        }}
-      >
-        <ListItemText primary="Employees" />
-      </ListItemButton>
+                  }}
+                  className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition ${
+                    selected
+                      ? "bg-green-600 text-white shadow-md shadow-green-600/20"
+                      : "text-gray-600 hover:bg-green-50 hover:text-green-700"
+                  }`}
+                >
+                  <Icon size={20} strokeWidth={1.9} />
+                  <span>{label}</span>
+                  {selected && (
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-white" />
+                  )}
+                </button>
+              );
+            })}
+        <div className="mt-auto p-4">
+          <div className="rounded-2xl bg-green-50 p-4">
+            {/* <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-white text-green-700">
+              <BedDouble size={19} />
+            </div> */}
+            <p className="text-sm font-semibold text-gray-800">
+              Need assistance?
+            </p>
+            <p className="mt-1 text-xs leading-5 text-gray-500 text-wrap">
+              Manage your hotel operations with ease.
+            </p>
+            <button className="mt-3 text-xs font-semibold text-green-700 hover:underline">
+              Help & support →
+            </button>
+          </div>
 
-      <ListItemButton
-        onClick={() => {
-          setTitle("Customers");
-        }}
-      >
-        <ListItemText primary="Customers" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Social");
-          setOpenCommunication(!openCommunication);
-        }}
-      >
-        <ListItemText primary="Social" />
-        {openCommunication ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={openCommunication} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton
-            sx={{ pl: 4 }}
-            onClick={() => {
-              setMainBody(<News />);
-            }}
-          >
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Newspaper" />
-          </ListItemButton>
-          <ListItemButton
-            sx={{ pl: 4 }}
-            onClick={() => {
-              setMainBody(<Videos />);
-            }}
-          >
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Videos" />
-          </ListItemButton>
-          <ListItemButton
-            sx={{ pl: 4 }}
-            onClick={() => {
-              setMainBody(<Memes />);
-            }}
-          >
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Memes" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Football" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Wall" />
-          </ListItemButton>
-        </List>
-      </Collapse>
-      <ListItemButton
-        onClick={() => {
-          setOpenInventory(!openInventory);
-          setTitle("Inventory");
-        }}
-      >
-        <ListItemText primary="Inventory" />
-        {openInventory ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={openInventory} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Fixed assets" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Consumables" />
-          </ListItemButton>
-        </List>
-      </Collapse>
-      <ListItemButton
-        onClick={() => {
-          setTitle("Analytics");
-          setOpenanalytics(!openAnalytics);
-        }}
-      >
-        <ListItemText primary="Analytics and AI" />
-        {openAnalytics ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={openAnalytics} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Projections" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItemButton>
-        </List>
-      </Collapse>
+          <button className="mt-4 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-gray-600 hover:bg-gray-100">
+            <LogOut size={19} />
+            Sign out
+          </button>
 
-      <ListItemButton
-        onClick={() => {
-          setTitle("Accounts");
-          setOpenAccounts(!openAccounts);
-        }}
-      >
-        <ListItemText primary="Accounts" />
-        {openAccounts ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={openAccounts} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemText
-              primary={<Typography variant="body2">Payroll</Typography>}
-            />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {}}>
-            <ListItemText
-              primary={<Typography variant="body2">Disbursement</Typography>}
-            />
-          </ListItemButton>
-        </List>
-      </Collapse> */}
-
-      <ListItemButton
-        onClick={() => {
-          setTitle("Settings");
-          handleClose();
-        }}
-      >
-        <IconButton>
-          <Settings2/>
-        </IconButton>
-        <ListItemText primary="Settings" />
-      </ListItemButton>
-      <ListItemButton
-        onClick={() => {
-          setTitle("About Hotman");
-          handleClose();
-        }}
-      >
-        <ListItemText primary="About Hotman" />
-      </ListItemButton>
-    </List>
+          <p className="px-3 pb-1 pt-2 text-xs text-gray-400">
+            TRM Hotel System · v1.0
+          </p>
+        </div>
+      </nav>
+       
+    </Stack>
   );
 }
 
@@ -611,7 +503,7 @@ export function Payment(props) {
     },
   });
   return (
-    <DialogContent elevation={2}>
+    <DialogContent className="z-10">
       <Stack rowGap={2}>
         <Box display={"flex"} justifyContent={"end"} px={3}>
           <Typography fontWeight={"bold"}>Amount : {amount}</Typography>
