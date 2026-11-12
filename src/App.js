@@ -18,6 +18,9 @@ import Sales from "./mymenu/sales";
 import Employee from "./employees/employees";
 import Dashboard from "./dashboard/Dashboard";
 import TableManagement from "./mymenu/newtable";
+import HotelDashboard from "./dashboard/Dashboard";
+import Kinventory from "./mymenu/kitcheninventory";
+import Sales2 from "./mymenu/sale";
 
 const myTheme = createTheme({
   components: {
@@ -75,6 +78,22 @@ function App() {
             }
           />
           <Route
+            path="/table"
+            element={
+              <MenuProvider
+                children={<AdminMiniDrawer content={<TableManagement />} />}
+              ></MenuProvider>
+            }
+          />
+          <Route
+            path="/kitchen"
+            element={
+              <MenuProvider
+                children={<AdminMiniDrawer content={<Kinventory />} />}
+              ></MenuProvider>
+            }
+          />
+          <Route
             path="/cart"
             element={
               <MenuProvider
@@ -101,12 +120,12 @@ function App() {
           />
           <Route
             path="/dashboard"
-            element={<TableManagement />}
-            // element={
-            //   <MenuProvider
-            //     children={<AdminMiniDrawer content={<Dashboard/>} />}
-            //   />
-            // }
+            // element={<TableManagement />}
+            element={
+              <MenuProvider
+                children={<AdminMiniDrawer content={<HotelDashboard/>} />}
+              />
+            }
           />
 
           <Route

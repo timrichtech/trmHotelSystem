@@ -6,17 +6,17 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
+  // <App />
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 // document.title = "School App"
 document.title = "Hotman"
 let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
             link.type = 'image/x-icon';
             link.rel = 'shortcut icon';
-            link.href = './resources/tracking.png';
+            link.href = './TRM-logo-green-600.svg';
             document.getElementsByTagName('head')[0].appendChild(link);
 
 

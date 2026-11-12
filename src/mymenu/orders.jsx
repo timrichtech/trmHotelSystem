@@ -110,8 +110,8 @@ function Order() {
       <CardContent>
         <TableContainer>
           <Table>
-            <TableHead className="">
-              <TableRow>
+            <TableHead className=" flex ">
+              <TableRow className="flex justify-evenly w-full">
                 <TableCell>
                   <Typography fontWeight={"bold"}></Typography>
                 </TableCell>
@@ -155,7 +155,7 @@ function Order() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className="mt-10">
               {orders.length > 0 ? (
                 orders.map((order, index) => {
                   return (

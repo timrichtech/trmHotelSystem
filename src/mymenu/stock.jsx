@@ -157,7 +157,9 @@ function Product(props) {
        <CardMedia component="img" className="max-w-sm" src={`http://127.0.0.1:8000/hot${image}`}
        alt={food_name}
        />
-       
+       <Typography fontWeight="bold" color={"primary"}>
+         {food_name}
+       </Typography>
 
         <Typography fontWeight="bold" color={"secondary"}>
           {description}

@@ -30,6 +30,7 @@ import profile_image from "../resources/default_profile.png";
 import { MenuContext } from "./menudata";
 import { useFormik } from "formik";
 import { values } from "lodash";
+import { Plus, X } from "lucide-react";
 
 const Products = () => {
   const { products } = useContext(MenuContext);
@@ -48,13 +49,15 @@ const Products = () => {
       <TabPanel value={value} index={0}>
         <Stack rowGap={1}>
           <Box display={"flex"} justifyContent={"space-between"}>
-            <Button
-              variant="contained"
+         
+             <button
+              
               onClick={() => setOpenNewProduct(true)}
-              startIcon={<Add />}
+              className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-blue-200 hover:bg-blue-700"
             >
+              <Plus size={18} />
               Add product
-            </Button>
+            </button>
             <TextField label="search" sx={{ width: "30%" }} />
           </Box>
           <Stack maxHeight={"60vh"} overflow={"auto"}>
@@ -96,16 +99,23 @@ const Products = () => {
         onClose={() => setOpenNewProduct(false)}
         fullWidth
         maxWidth={"md"}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4 backdrop-blur-sm"
       >
         <DialogTitle>
-          <Box display={"flex"} justifyContent={"space-between"}>
-            <Typography variant="h6" color={"primary"}>
-              Create Product
-            </Typography>
-            <IconButton onClick={() => setOpenNewProduct(false)}>
-              <Close color="secondary" />
-            </IconButton>
-          </Box>
+           <div className="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900">Add food product</h3>
+                      <p className="mt-1 text-sm text-slate-500">Register a new item in your restaurant menu.</p>
+                    </div>
+                    <button
+              // onClick={onClose}
+              onClick={() => setOpenNewProduct(false)}
+                      aria-label="Close dialog"
+                      className="rounded-lg p-2 text-slate-400 hover:bg-slate-100"
+                    >
+                      <X size={19} />
+                    </button>
+                  </div>
         </DialogTitle>
         <DialogContent>
           <NewProduct setOpen={setOpenNewProduct} />
@@ -140,7 +150,7 @@ export const NewProduct = (props) => {
           <Badge
             overlap="circular"
             badgeContent={
-              <IconButton>
+              <IconButton >
                 <Edit />
               </IconButton>
             }
@@ -148,40 +158,60 @@ export const NewProduct = (props) => {
             <Avatar sx={{ width: 124, height: 124 }} ></Avatar>
           </Badge>
         </Box>
-        <form onSubmit={newProductForm.handleSubmit}>
-          <Stack rowGap={1} mt={2}>
-            <TextField
-              label="Food name"
-              name="food_name"
+        <form onSubmit={newProductForm.handleSubmit} className="space-y-2">
+        
+               <label className="block text-sm font-medium text-slate-700">
+              food name
+              <input
+                required
+                name="food_name"
               id="food_name"
               onChange={newProductForm.handleChange}
               onBlur={newProductForm.handleBlur}
-            />
-            <TextField
-              label="Description"
-              name="description"
+                placeholder="e.g. Grilled Chicken"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 outline-none focus:border-blue-500"
+              />
+            </label>
+             <label className="block text-sm font-medium text-slate-700">
+              Description
+              <input
+                required
+                 name="description"
               id="description"
               onChange={newProductForm.handleChange}
               onBlur={newProductForm.handleBlur}
-            />
-            <TextField
-              label="Price"
-              name="price"
+                placeholder="e.g. Grilled Chicken"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 outline-none focus:border-blue-500"
+              />
+            </label>
+              <label className="block text-sm font-medium text-slate-700">
+              Selling price (KSh)
+              <input
+                required
+                min="1"
+                type="number"
+                 name="price"
               id="price"
               onChange={newProductForm.handleChange}
               onBlur={newProductForm.handleBlur}
-            />
+                placeholder="850"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 outline-none focus:border-blue-500"
+              />
+            </label>
             <Box display={"flex"} justifyContent={"space-evenly"}>
-              <Button
+              {/* <Button
                 variant="contained"
                 color="success"
                 fullWidth
                 type="submit"
               >
                 Create
-              </Button>
+            </Button> */}
+             <button type="submit" className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700">
+              Add product
+            </button>
             </Box>
-          </Stack>
+          
         </form>
       </CardContent>
     </Card>

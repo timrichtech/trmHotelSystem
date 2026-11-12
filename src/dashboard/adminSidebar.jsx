@@ -62,7 +62,7 @@ import Videos from "../mymenu/videos";
 import Memes from "../mymenu/memes";
 import { MenuContext } from "../mymenu/menudata";
 import { blue } from "@mui/material/colors";
-import { BedDouble, Bell, Building2, ChartNoAxesCombined,  ChevronDown,  LayoutDashboard,  LogOut,  LucideMenu,  Package,  Settings,  Settings2,  ShoppingCartIcon, Table2Icon, Utensils, Warehouse } from "lucide-react";
+import { BedDouble, Bell, Building2, ChartNoAxesCombined,  ChevronDown,  ClosedCaption,  LayoutDashboard,  LogOut,  LucideMenu,  Package,  Settings,  Settings2,  ShoppingCartIcon, Table2, Table2Icon, Utensils, Warehouse } from "lucide-react";
 import { useState } from "react";
 
 const drawerWidth = 240;
@@ -188,7 +188,7 @@ export default function AdminMiniDrawer(props) {
 const [active, setActive] = useState("Dashboard");
 const [notificationsOpen, setNotificationsOpen] = useState(false);
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box  className="flex bg-white">
       {/* <CssBaseline />My app bar */}
       <Box position="fixed" open={open} className="bg-green-600 w-full z-50">
         <Toolbar>
@@ -225,6 +225,7 @@ const [notificationsOpen, setNotificationsOpen] = useState(false);
               badgeContent={2}
               color="error"
               variant="standard"
+              className="hidden md:flex"
             >
               <Button  className="relative rounded-xl  border-gray-100 p-2.5 text-yellow hover:bg-gray-50">
                 <Settings size={19} />
@@ -323,7 +324,7 @@ const [notificationsOpen, setNotificationsOpen] = useState(false);
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white">
                 A
               </div>
-              <div className="hidden text-left sm:block">
+              <div className=" text-left sm:block">
                 <p className="text-sm font-semibold text-gray-800">
                   Administrator
                 </p>
@@ -345,12 +346,13 @@ const [notificationsOpen, setNotificationsOpen] = useState(false);
           </Box>
         </Toolbar>
       </Box>
-      <Drawer variant="permanent" open={open} className="bg-blue-600">
+      <Drawer variant="permanent" open={open} className="p-1 z-50">
         <DrawerHeader className="pt-2">
-        <Stack className="flex  shrink-0 items-center justify-between border-b border-gray-100 px-2">
-          <Box className="flex items-center gap-3">
-            <div className="flex p-3 h-11 w-11 items-center justify-center rounded-xl bg-green-600 text-2xl font-black text-white">
-              TRM
+        {/* <Stack className="flex  shrink-0 items-center justify-between border-b border-gray-100 px-2"> */}
+          <Box className="flex items-center gap-1">
+            <div className="flex ml-2  p-3 h-11 w-11 items-center justify-center rounded-xl bg-green-600 text-2xl font-black text-white">
+                TRM
+              {/* <img src="../resources/images/CR" alt="TRM Logo" width="500" height="300"></img> */}
             </div>
             <div>
               <h1 className="text-lg font-bold text-gray-900">
@@ -359,9 +361,12 @@ const [notificationsOpen, setNotificationsOpen] = useState(false);
               <p className="text-xs text-gray-500">
                 Hotel Management
               </p>
-              </div>
+            </div>
+            <IconButton onClick={()=> handleDrawerClose()}>
+              <Close className=""/>
+            </IconButton>
             </Box>
-          </Stack>
+          {/* </Stack> */}
         </DrawerHeader>
         <Divider />
         <AdminDash
@@ -379,21 +384,27 @@ const [notificationsOpen, setNotificationsOpen] = useState(false);
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         style={{ maxHeight: "100%", overflow: "auto" }}
-        bgcolor={"#ebecf0"}
+        // bgcolor={"#ebecf0"}
+        className="bg-white"
+
       >
         <DrawerHeader />
-        {content}
+        <div className="">
+          {content}
+          </div>
       </Box>
     </Box>
   );
 }
 const navigation = [
   { label: "Dashboard", icon: LayoutDashboard ,navpath: "/dashboard"},
+  { label: "Tables", icon: Table2 ,navpath: "/table"},
   { label: "Organization", icon: TableRestaurant ,navpath: "/organization"},
   { label: "Products", icon: Package,navpath: "/products" },
   { label: "Menu", icon: Utensils,navpath: "/menu" },
   { label: "Orders", icon: ShoppingCart ,navpath: "/orders"},
-  { label: "Inventory", icon: Warehouse ,navpath: "/stock"},
+  { label: "Food Inventory", icon: Warehouse ,navpath: "/stock"},
+  { label: "Kitchen Inventory", icon: Warehouse ,navpath: "/Kitchen"},
   { label: "Sales", icon: ChartNoAxesCombined ,navpath: "/sales"},
   { label: "Settings", icon: Settings ,},
 ];
@@ -405,7 +416,7 @@ function AdminDash( { active, setActive,setMainBody,setTitle,handleClose }) {
   
 
   return (
-    <Stack>
+    <Stack className="">
       <Typography className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-gray-400">
             Main menu
           </Typography>

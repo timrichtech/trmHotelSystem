@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { MenuContext } from "../mymenu/menudata";
-import { Box, Button, Card, CardContent, Dialog, DialogTitle, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Dialog, DialogTitle, IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Add, Close, Remove } from "@mui/icons-material";
 import { Payment } from "../dashboard/adminSidebar";
 import { useNavigate } from "react-router";
@@ -13,7 +13,8 @@ export default function MyCart() {
     const [openPay, setOpenPay] = useState(false);
     const nav = useNavigate();
 
-    const getQuantity = (id)=>{
+  const getQuantity = (id) => {
+    // const [id, setId] = useState();
       let quantity = cart.filter(item=>{
         return item.id===id ? true :false;
       });
@@ -35,14 +36,22 @@ export default function MyCart() {
 
     return (
       <Card>
-        <CardContent>
-          {cart.length > 0 ?<>
+        <CardContent className="p-2 aspect-auto">
+          {cart.length > 0 ? <>
+            <Stack>
+              <Box className="flex justify-start gap-2 pl-2" >
+                <Typography variant="h5" color={"secondary"} fontWeight={"bold"}>
+                  Cart
+                </Typography>
+              </Box>
           <Box className="flex justify-end gap-2" >
             <Button onClick={() => nav("/menu")} variant="contained" color="warning"><Add/>Add Food</Button>
             <Typography variant="h6" color={"primary"}>
               Table : {currentTable ? currentTable.table_name : "None"}
             </Typography>
-          </Box>
+              </Box>
+              <Typography className="mt-2 text-sm text-slate-500 font-mono"> Menu items selected</Typography>
+              </Stack>
           <TableContainer>
             <Table>
               <TableHead>
